@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.playAudio:
                 PlayRecord();
-                ButtonEnabled(true, false, false);
+//                ButtonEnabled(true, false, false);
                 printLog("播放录音");
                 break;
             case R.id.deleteAudio:
@@ -113,8 +113,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 i++;
             }
             dis.close();
+            /**
+             * AudioFormat.CHANNEL_CONFIGURATION_STEREO //双声道
+             * AudioFormat.CHANNEL_CONFIGURATION_MONO 单声道
+             *
+             */
             AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
-                    16000, AudioFormat.CHANNEL_CONFIGURATION_MONO,
+                    16000, AudioFormat.CHANNEL_CONFIGURATION_STEREO,
                     AudioFormat.ENCODING_PCM_16BIT,
                     musicLength * 2,
                     AudioTrack.MODE_STREAM);
@@ -147,7 +152,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //16K采集率
         int frequency = 16000;
         //格式
-        int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
+        /**
+         * 双声道
+         */
+        int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_STEREO;
+        /**
+         * 单声道
+         */
+//        int channelConfiguration = AudioFormat.CHANNEL_CONFIGURATION_MONO;
         //16Bit
         int audioEncoding = AudioFormat.ENCODING_PCM_16BIT;
         //生成PCM文件
