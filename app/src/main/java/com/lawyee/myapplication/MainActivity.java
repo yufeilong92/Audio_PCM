@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.playAudio:
                 PlayRecord();
-//                ButtonEnabled(true, false, false);
+                ButtonEnabled(true, false, false);
                 printLog("播放录音");
                 break;
             case R.id.deleteAudio:
@@ -97,14 +97,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     //播放文件
     public void PlayRecord() {
-        if(file == null){
+//       file = new File("/storage/emulated/0/baiduASR/617375.7941559432.pcm");
+        if(this.file == null){
             return;
         }
+
         //读取文件
-        int musicLength = (int) (file.length() / 2);
+
+        int musicLength = (int) (this.file.length() / 2);
         short[] music = new short[musicLength];
         try {
-            InputStream is = new FileInputStream(file);
+            InputStream is = new FileInputStream(this.file);
             BufferedInputStream bis = new BufferedInputStream(is);
             DataInputStream dis = new DataInputStream(bis);
             int i = 0;
@@ -118,9 +121,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
              * AudioFormat.CHANNEL_CONFIGURATION_MONO 单声道
              *
              */
+
             AudioTrack audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC,
                     16000, AudioFormat.CHANNEL_CONFIGURATION_STEREO,
-                    AudioFormat.ENCODING_PCM_16BIT,
+                    AudioFormat.ENCODING_PCM_8BIT,
                     musicLength * 2,
                     AudioTrack.MODE_STREAM);
             audioTrack.play();
