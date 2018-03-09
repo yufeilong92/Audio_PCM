@@ -7,7 +7,7 @@ import android.widget.Button;
 
 public class Main2Activity extends AppCompatActivity  {
 
-
+    private String path="/storage/emulated/0/baiduASR/115442.63075767734.pcm";
     private Button btn;
 
     @Override
@@ -23,7 +23,7 @@ public class Main2Activity extends AppCompatActivity  {
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new play().playAudio();
+             new playAudio().playAudioData(path);
             }
         });
     }
